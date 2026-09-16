@@ -1,7 +1,7 @@
 # Enfusion Script for Zed
 
-> The GitHub repository is a read-only mirror of
-> <https://git.royvanempel.nl/royvanempel/zed-enfusion>.
+> Mirrored at <https://git.royvanempel.nl/royvanempel/zed-enfusion>; issues and
+> pull requests go through GitHub.
 
 Zed extension for **Enfusion Script** (Enforce Script) as used by Arma
 Reforger and the Enfusion Workbench. It is the Zed counterpart of the VS Code
