@@ -16,5 +16,3 @@ languages = ["Enfusion Script"]
 
 [language_servers.reforger-language-server.language_ids]
 "Enfusion Script" = "enforce"
-
-[context_servers.reforger-script-tools]

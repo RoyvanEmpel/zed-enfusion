@@ -12,7 +12,7 @@ and reuses its Rust language server.
 | Parser diagnostics (errors while typing) | `reforger_language_server` |
 | Semantic token coloring (classes, fields, preprocessor, …) | `reforger_language_server` + `semantic_token_rules.json` |
 | Range formatting | `reforger_language_server` |
-| MCP server for the Zed agent panel (script / game data / official wiki search) | `reforger_language_server mcp` as a Zed context server |
+| MCP server for the Zed agent panel (script / game data / official wiki search) | `reforger_language_server mcp`, configured as a Zed context server (see below) |
 | Workbench compiler validation (NET API, port 5775) | Zed tasks in `examples/reforger-project/.zed/tasks.json` |
 
 Not portable from VS Code: the custom Enter/Tab/Space typing assists, the
@@ -89,33 +89,31 @@ Override everything with `lsp.reforger-language-server.binary.arguments`
 `reforger_language_server --help` for all options (`--log <path>` is useful
 when debugging).
 
-## MCP context server (agent panel)
+## MCP server for the agent panel
 
-The extension registers `reforger-script-tools` as a Zed context server: the
-same binary in `mcp` mode (87 tools: workspace/game-data symbol and text
-search, symbol inspection, official wiki lookup). **It needs no configuration**:
-Zed starts context servers in the project root, and the extension passes that
-directory as `--workspace-scripts`. The command is always `/bin/sh -c` (or
-`cmd /C` on Windows) by absolute path, because Zed resolves an extension's
-context server command relative to the extension's work directory; the shell
-then finds `reforger_language_server` on `$PATH`. Result: the agent searches the
-project you have open. Optional overrides under `context_servers`:
+The same binary has an `mcp` mode with 87 tools: workspace and game-data symbol
+and text search, symbol inspection and official-wiki lookup. Zed extensions
+that provide a language may not also register an MCP server, so add it to your
+Zed settings yourself. Zed starts context servers in the project root, so
+`$PWD` makes the agent search whatever project you have open:
 
 ```jsonc
 "context_servers": {
   "reforger-script-tools": {
-    "settings": {
-      "workspace_scripts": ["/home/you/mods/OtherMod"],  // index these instead of the open project
-      "external_index_mode": "none"
+    "command": {
+      "path": "/bin/sh",
+      "args": [
+        "-c",
+        "exec reforger_language_server mcp --external-index-mode none --workspace-scripts \"$PWD\" --official-wiki-root \"$HOME/.local/share/reforger-script-tools/official-wiki\""
+      ]
     }
   }
 }
 ```
 
-`official_wiki_root` overrides the wiki corpus location (default
-`~/.local/share/reforger-script-tools/official-wiki`, passed automatically when
-the directory exists). Set `command` (`path`, `arguments`) instead to bypass
-these settings entirely.
+Replace `"$PWD"` with fixed paths to index other mods, and drop
+`--official-wiki-root` if you did not install the wiki corpus. Start a new
+agent thread after changing this; running threads keep their old server.
 
 ## Workbench integration
 
@@ -129,8 +127,8 @@ terminal. Workbench itself runs on Windows only.
 
 ```
 zed-enfusion/
-  extension.toml                     manifest: grammar, language server, context server
-  Cargo.toml, src/lib.rs             extension logic (binary discovery, args, MCP)
+  extension.toml                     manifest: grammar, language server
+  Cargo.toml, src/lib.rs             extension logic (binary discovery, arguments)
   languages/enfusion-script/
     config.toml                      comments, brackets, tabs
     highlights.scm brackets.scm indents.scm outline.scm textobjects.scm overrides.scm
