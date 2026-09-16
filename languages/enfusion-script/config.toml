@@ -1,0 +1,27 @@
+name = "Enfusion Script"
+grammar = "enforce"
+# Enfusion Script uses the `.c` extension, which Zed also assigns to C. An
+# extension cannot express "only `.c` under a Scripts/ folder", so this claims
+# every `.c` file. Zed resolves equal-length suffix ties in favour of the most
+# recently registered language, and extensions register after built-ins, so
+# Enfusion Script wins over C while the extension is installed. Projects that
+# also contain real C code can hand `.c` back with the `file_types` setting,
+# which always beats extension-provided suffixes:
+#   "file_types": { "C": ["src/**/*.c"] }
+path_suffixes = ["c"]
+line_comments = ["// ", "//! "]
+block_comment = ["/* ", " */"]
+autoclose_before = ";:.,=}])>"
+tab_size = 4
+hard_tabs = true
+brackets = [
+  { start = "{", end = "}", close = true, newline = true },
+  { start = "[", end = "]", close = true, newline = false },
+  { start = "(", end = ")", close = true, newline = false },
+  { start = "<", end = ">", close = false, newline = false, not_in = ["string", "comment"] },
+  { start = "\"", end = "\"", close = true, newline = false, not_in = ["string", "comment"] },
+  { start = "/*", end = " */", close = true, newline = false, not_in = ["string", "comment"] },
+]
+
+[overrides.string]
+word_characters = ["-", "/", "."]

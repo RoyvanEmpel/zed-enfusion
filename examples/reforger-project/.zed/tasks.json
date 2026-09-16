@@ -1,0 +1,25 @@
+// Zed tasks that talk to a running Arma Reforger Workbench through its
+// NET API (Resource Manager > Options > "Enable net API", default port 5775).
+// These replace the VS Code command "Validate Scripts in Workbench".
+// Workbench itself only runs on Windows; the server's registry/process
+// helpers are Windows-only too, but the plain status/validate calls are TCP.
+[
+  {
+    "label": "Reforger: Workbench status",
+    "command": "reforger_language_server",
+    "args": ["workbench-api", "status", "--host", "127.0.0.1", "--port", "5775"],
+    "reveal": "always"
+  },
+  {
+    "label": "Reforger: Validate scripts in Workbench",
+    "command": "reforger_language_server",
+    "args": ["workbench-api", "validate", "--host", "127.0.0.1", "--port", "5775"],
+    "reveal": "always"
+  },
+  {
+    "label": "Reforger: Read Workbench logs",
+    "command": "reforger_language_server",
+    "args": ["workbench-api", "read-logs", "--host", "127.0.0.1", "--port", "5775"],
+    "reveal": "always"
+  }
+]

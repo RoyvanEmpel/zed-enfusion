@@ -1,0 +1,20 @@
+id = "enfusion-script"
+name = "Enfusion Script"
+version = "0.1.0"
+schema_version = 1
+authors = ["Roy van Empel <royvanempel@gmail.com>"]
+description = "Enfusion Script (Arma Reforger / Enforce Script) support: tree-sitter syntax highlighting, outline, brackets, and the Reforger Script Tools language server (completion, hover, go-to-definition, diagnostics, semantic tokens, formatting)."
+repository = "https://github.com/RoyvanEmpel/zed-enfusion"
+
+[grammars.enforce]
+repository = "https://github.com/RoyvanEmpel/tree-sitter-enforce"
+rev = "f6daeccf744141c13b4a94c39d7de22307173735"
+
+[language_servers.reforger-language-server]
+name = "Reforger Script Tools"
+languages = ["Enfusion Script"]
+
+[language_servers.reforger-language-server.language_ids]
+"Enfusion Script" = "enforce"
+
+[context_servers.reforger-script-tools]

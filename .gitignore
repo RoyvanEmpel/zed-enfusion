@@ -1,0 +1,5 @@
+/target
+/grammars
+*.wasm
+# Logs written by reforger_language_server when run from a project directory
+AppData/

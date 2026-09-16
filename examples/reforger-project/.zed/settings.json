@@ -1,0 +1,23 @@
+// Example project settings for an Arma Reforger mod opened in Zed.
+// Copy this `.zed/` folder next to your `.gproj` file.
+{
+  // The extension already opens every `.c` file as Enfusion Script. If this
+  // project also has real C sources, give those back to C, e.g.:
+  // "file_types": { "C": ["native/**/*.c"] },
+  "languages": {
+    "Enfusion Script": {
+      "hard_tabs": true,
+      "tab_size": 4,
+      "format_on_save": "off"
+    }
+  },
+  "lsp": {
+    "reforger-language-server": {
+      // Uncomment to point at a specific binary instead of $PATH:
+      // "binary": {
+      //   "path": "/home/you/.local/bin/reforger_language_server",
+      //   "arguments": ["--workspace-scripts", "/path/to/your/mod", "--external-index-mode", "none"]
+      // }
+    }
+  }
+}

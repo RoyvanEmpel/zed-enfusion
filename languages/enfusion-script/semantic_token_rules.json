@@ -1,0 +1,10 @@
+[
+  { "token_type": "reforgerField", "style": ["property"] },
+  { "token_type": "reforgerPunctuation", "style": ["punctuation"] },
+  { "token_type": "reforgerPreprocessor", "style": ["preproc", "keyword"] },
+  { "token_type": "class", "style": ["type"] },
+  { "token_type": "enum", "style": ["enum", "type"] },
+  { "token_type": "enumMember", "style": ["constant"] },
+  { "token_type": "typeParameter", "style": ["type"] },
+  { "token_type": "parameter", "style": ["variable.parameter", "variable"] }
+]
