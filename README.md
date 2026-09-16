@@ -1,8 +1,5 @@
 # Enfusion Script for Zed
 
-> Mirrored at <https://git.royvanempel.nl/royvanempel/zed-enfusion>; issues and
-> pull requests go through GitHub.
-
 Zed extension for **Enfusion Script** (Enforce Script) as used by Arma
 Reforger and the Enfusion Workbench. It is the Zed counterpart of the VS Code
 extension [Reforger Script Tools](https://github.com/burn0ut7/reforger-script-tools)
